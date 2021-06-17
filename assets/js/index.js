@@ -31,6 +31,11 @@ const books = [
 const bookList = document.querySelector(".book-list");
 
 const bookCards = [];
+books.sort((a, b) => {
+  if(a.author.split(" ").reverse().join(", ") < b.author.split(" ").reverse().join(", ")) return -1;
+  if(a.author.split(" ").reverse().join(", ") > b.author.split(" ").reverse().join(", ")) return 1;
+})
+
 for (let i = 0; i < books.length; i++) {
   bookCards.push(document.createElement("div"));
   bookCards[i].className = "book card mb-4";
