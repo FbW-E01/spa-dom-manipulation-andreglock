@@ -27,3 +27,25 @@ const books = [
     img: "https://eloquentjavascript.net/img/cover.jpg"
   }
 ];
+
+const bookList = document.querySelector(".book-list");
+
+const bookCards = [];
+books.sort((a, b) => {
+  if(a.author.split(" ").reverse().join(", ") < b.author.split(" ").reverse().join(", ")) return -1;
+  if(a.author.split(" ").reverse().join(", ") > b.author.split(" ").reverse().join(", ")) return 1;
+})
+
+for (let i = 0; i < books.length; i++) {
+  bookCards.push(document.createElement("div"));
+  bookCards[i].className = "book card mb-4";
+  bookCards[i].innerHTML = `<img src="${books[i].img}" class="book-cover"> <div class="card-body" style="height: 120px"><h5 class="card-title">${books[i].title}</h5> <p class="card-subtitle text-secondary">${books[i].author.split(" ").reverse().join(", ")}</p></div>`;
+  if (books[i].alreadyRead === true) {
+    bookCards[i].innerHTML += ` <div class="card-body bg-light mt-2"><div class="status p-3 mb-2 bg-success text-white text-right rounded-left rounded-right">Read</div></div>`
+  } else {
+    bookCards[i].innerHTML += ` <div class="card-body bg-light mt-2"><div class="status p-3 mb-2 bg-secondary text-white text-right rounded-left rounded-right">To read</div></div>`
+  }
+  bookList.appendChild(bookCards[i]);
+}
+
+console.log(bookCards);
